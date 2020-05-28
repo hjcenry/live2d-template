@@ -23,7 +23,8 @@ Q(window).load(function(){
 	Q('div#landlord').append(hideBtn);
 	var changeBtn=Q("<button id='Change'>切换</button>");
 	Q('div#landlord').append(changeBtn);
-	Q(changeBtn).onclick(function () {
+	Q(changeBtn).click(function () {
+		console.log('隐藏了！');
 		Q(div).hide();
 	});
 	InitLive2D();
