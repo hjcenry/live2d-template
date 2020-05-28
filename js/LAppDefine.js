@@ -41,7 +41,7 @@ var LAppDefine = {
     //需事先配置好json文件里的textures属性
     //暂不支持保存功能
     TEXURE_CHANGE_MODE : "random",
-    IS_START_TEXURE_CHANGE : true,
+    IS_START_TEXURE_CHANGE : false,
     TEXURE_BUTTON_ID : "Texture",
     /**
      *  模型定义

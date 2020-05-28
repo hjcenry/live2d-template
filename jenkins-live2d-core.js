@@ -23,8 +23,8 @@ Q(window).load(function () {
     Q('div#landlord').append(hideBtn);
     var changeModelBtn = Q("<button id='Change'>切换</button>");
     Q('div#landlord').append(changeModelBtn);
-    var changeTextureBtn = Q("<button id='Texture'>换装</button>");
-    Q('div#landlord').append(changeTextureBtn);
+    // var changeTextureBtn = Q("<button id='Texture'>换装</button>");
+    // Q('div#landlord').append(changeTextureBtn);
     Q(hideBtn).click(function () {
         console.log('隐藏了！');
         Q(div).hide();
