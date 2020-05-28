@@ -15,7 +15,7 @@ Q(window).load(function () {
     Q('body').append(div);
     var message = Q("<div class='message' style='opacity:0'></div>");
     Q('div#landlord').append(message);
-    var canvas = Q("<canvas id='live2d' width=300 height=600 class='live2d-canvas'></canvas>");
+    var canvas = Q("<canvas id='live2d' class='live2d-canvas'></canvas>");
     Q('div#landlord').append(canvas);
     var audio = Q("<audio id='my_audio' class='live2d-audio'></audio>");
     Q('body').append(audio);
