@@ -52,16 +52,16 @@ var LAppDefine = {
      */
     MODELS:
         [
+            ["http://172.16.1.98:8083/userContent/live2d-core/model/sagiri/sagiri.model.json"],
+            ["http://172.16.1.98:8083/userContent/live2d-core/model/Epsilon/runtime/Epsilon.model.json"],
             ["http://172.16.1.98:8083/userContent/live2d-core/model/haru/haru.model.json"],
             ["http://172.16.1.98:8083/userContent/live2d-core/model/xiaomai/xiaomai.model.json"],
             ["http://172.16.1.98:8083/userContent/live2d-core/model/wanko/wanko.model.json"],
             ["http://172.16.1.98:8083/userContent/live2d-core/model/shizuku/shizuku.model.json"],
             ["http://172.16.1.98:8083/userContent/live2d-core/model/haru/haru_01.model.json", "http://172.16.1.98:8083/userContent/live2d-core/model/haru/haru_02.model.json"],
             ["http://172.16.1.98:8083/userContent/live2d-core/model/Epsilon2.1/Epsilon2.1.model.json"],
-            ["http://172.16.1.98:8083/userContent/live2d-core/model/Epsilon/runtime/Epsilon.model.json"],
             ["http://172.16.1.98:8083/userContent/live2d-core/model/Pio/model.json"],
             ["http://172.16.1.98:8083/userContent/live2d-core/model/rem/model.json"],
-            ["http://172.16.1.98:8083/userContent/live2d-core/model/sagiri/sagiri.model.json"],
             ["http://172.16.1.98:8083/userContent/live2d-core/model/katou_01/katou_01.model.json"],
         ],
 
