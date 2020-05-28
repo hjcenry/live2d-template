@@ -1,10 +1,10 @@
 #landlord {
     user-select: none;
     position: fixed;
-    left: 0;
+    right: 0;
     bottom: 0;
     width: 300px;
-    height: 550px;
+    height: 650px;
     z-index: 10000;
     font-size: 0;
     transition: all .3s ease-in-out;
@@ -40,7 +40,15 @@
     animation-timing-function: ease-in-out;
 }
 
-.hide-button, #Change {
+.hide-button, #Change, #Texture {
+    position: relative;
+    top: 10px;
+    right: 0;
+    /* bottom: 30px; */
+    /*display: none;*/
+    /* padding: 4px; */
+    width: 60px;
+    height: 20px;
     overflow: hidden;
     border: 1px solid rgba(255, 137, 255, .4);
     border-radius: 12px;
@@ -51,29 +59,7 @@
     cursor: pointer;
 }
 
-.hide-button {
-    position: relative;
-    top: 10px;
-    right: 0;
-    /* bottom: 30px; */
-    /*display: none;*/
-    /* padding: 4px; */
-    width: 60px;
-    height: 20px;
-}
-
-#Change {
-    position: relative;
-    top: 10px;
-    right: 0;
-    /* bottom: 30px; */
-    /*display: none;*/
-    /* padding: 4px; */
-    width: 60px;
-    height: 20px;
-}
-
-.hide-button:hover, #Change:hover {
+.hide-button:hover, #Change:hover, #Texture:hover {
     border: 1px solid #f4a7b9;
     background: #f4f6f8;
 }

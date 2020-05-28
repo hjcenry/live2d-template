@@ -15,14 +15,16 @@ Q(window).load(function () {
     Q('body').append(div);
     var message = Q("<div class='message' style='opacity:0'></div>");
     Q('div#landlord').append(message);
-    var canvas = Q("<canvas id='live2d' width=300 height=500 class='live2d-canvas'></canvas>");
+    var canvas = Q("<canvas id='live2d' width=300 height=600 class='live2d-canvas'></canvas>");
     Q('div#landlord').append(canvas);
     var audio = Q("<audio id='my_audio' class='live2d-audio'></audio>");
     Q('body').append(audio);
     var hideBtn = Q("<button class='hide-button'>隐藏</button>");
     Q('div#landlord').append(hideBtn);
-    var changeBtn = Q("<button id='Change'>切换</button>");
-    Q('div#landlord').append(changeBtn);
+    var changeModelBtn = Q("<button id='Change'>切换</button>");
+    Q('div#landlord').append(changeModelBtn);
+    var changeTextureBtn = Q("<button id='Texture'>换装</button>");
+    Q('div#landlord').append(changeTextureBtn);
     Q(hideBtn).click(function () {
         console.log('隐藏了！');
         Q(div).hide();
