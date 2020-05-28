@@ -1,8 +1,8 @@
-var message_Path = 'http://172.16.1.98:8083/userContent/live2d-core'
-var home_Path = 'http://172.16.1.98:8083/'
+var message_Path = 'http://172.16.1.98:8083/userContent/live2d-core';
+var home_Path = 'http://172.16.1.98:8083/';
 //loadlive2d("live2d", "http://172.16.1.98:8083/userContent/live2d-core/model/tia/model.json");
 Q(window).load(function(){
-	console.log('window load!!!!')
+	console.log('window load!!!!');
 	//var canvas=Q("<canvas id='mycanvas' width=300px height=500px class='live2d-canvas'></canvas>");
 	//Q('body').append(canvas);
 	//var audio=Q("<audio id='my_audio' class='live2d-audio'></audio>");
@@ -15,13 +15,16 @@ Q(window).load(function(){
 	Q('body').append(div);
 	var message=Q("<div class='message' style='opacity:0'></div>");
 	Q('div#landlord').append(message);
-	var canvas=Q("<canvas id='live2d' width=300 height=500 class='live2d-canvas'></canvas>")
+	var canvas=Q("<canvas id='live2d' width=300 height=500 class='live2d-canvas'></canvas>");
 	Q('div#landlord').append(canvas);
     var audio=Q("<audio id='my_audio' class='live2d-audio'></audio>");
     Q('body').append(audio);
-	var hideBtn=Q("<button class='hide-button'>隐藏</button>")
+	var hideBtn=Q("<button class='hide-button'>隐藏</button>");
 	Q('div#landlord').append(hideBtn);
-	var changeBtn=Q("<button id='Change'>切换</button>")
+	var changeBtn=Q("<button id='Change'>切换</button>");
 	Q('div#landlord').append(changeBtn);
-	InitLive2D()
-})
+	Q(changeBtn).onclick(function () {
+		Q(div).hide();
+	});
+	InitLive2D();
+});
