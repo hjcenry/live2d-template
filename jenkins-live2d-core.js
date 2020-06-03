@@ -9,7 +9,7 @@ function chatUILogic() {
     Q('div#landlord').append(hideChatBtn);
     var sendChatBtn = Q("<button class='chat-button'>发送</button>");
     Q('div#landlord').append(sendChatBtn);
-    var chatInput = Q("<input class='chatInput' style='opacity:80' />");
+    var chatInput = Q("<input class='chatInput' style='opacity:50' />");
     Q('div#landlord').append(chatInput);
 
     Q(showChatBtn).click(function () {
@@ -27,6 +27,11 @@ function chatUILogic() {
         Q(showChatBtn).show();
         Q(hideChatBtn).hide();
     });
+
+    Q(sendChatBtn).click(function () {
+        var chatContent = Q(chatInput).val();
+        console.log(chatContent);
+    })
 }
 
 //loadlive2d("live2d", "http://172.16.1.98:8083/userContent/live2d-core/model/tia/model.json");
