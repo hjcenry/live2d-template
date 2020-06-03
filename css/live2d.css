@@ -71,7 +71,7 @@
 .chatInput {
     display: none;
     position: relative;
-    bottom: 20px;
+    bottom: 50px;
 }
 
 @media (max-width: 860px) {
