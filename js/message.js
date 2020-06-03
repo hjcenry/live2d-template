@@ -1,4 +1,4 @@
-console.log('load message.js')
+console.log('load message.js');
 
 function renderTip(template, context) {
     var tokenReg = /(\\)?\{([^\{\}\\]+)(\\)?\}/g;

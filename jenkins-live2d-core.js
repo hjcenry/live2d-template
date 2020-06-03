@@ -31,6 +31,7 @@ function chatUILogic() {
     Q(sendChatBtn).click(function () {
         var chatContent = Q(chatInput).val();
         console.log(chatContent);
+        showMessage(chatContent, 5000);
     })
 }
 
