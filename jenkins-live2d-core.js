@@ -9,7 +9,7 @@ function chatUILogic() {
     Q('div#landlord').append(hideChatBtn);
     var sendChatBtn = Q("<button class='chat-button'>发送</button>");
     Q('div#landlord').append(sendChatBtn);
-    var chatInput = Q("<input class='chatInput' style='opacity:0' />");
+    var chatInput = Q("<input class='chatInput' style='opacity:80' />");
     Q('div#landlord').append(chatInput);
 
     Q(showChatBtn).click(function () {
