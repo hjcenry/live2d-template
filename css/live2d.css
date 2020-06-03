@@ -40,7 +40,7 @@
     animation-timing-function: ease-in-out;
 }
 
-.hide-button, #Change, #Texture {
+.hide-button, #Change, #Texture, .chat-button {
     position: relative;
     top: 10px;
     right: 0;
@@ -59,7 +59,7 @@
     cursor: pointer;
 }
 
-.hide-button:hover, #Change:hover, #Texture:hover {
+.hide-button:hover, #Change:hover, #Texture:hover, .chat-button:hover {
     border: 1px solid #f4a7b9;
     background: #f4f6f8;
 }
