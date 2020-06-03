@@ -64,6 +64,14 @@
     background: #f4f6f8;
 }
 
+.chat-button {
+    display: none;
+}
+
+.chatInput {
+    display: none;
+}
+
 @media (max-width: 860px) {
     #landlord {
         display: none;
