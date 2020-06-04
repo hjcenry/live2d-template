@@ -22,64 +22,66 @@ function sendChatToBot(chatContent) {
         }
     };
 
-    Q.post(
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://openapi.tuling123.com/openapi/api/v2",
+        "method": "POST",
+        "headers": {
+            "cache-control": "no-cache",
+            "postman-token": "fea35f00-3f49-11c5-1919-0a0c53871d42"
+        },
+        "data": json.stringify(reqJson)
+    };
+
+    Q.ajax(settings).done(function (response) {
+        console.log(response);
+        var code = response.intent.code;
+        if (code === 5000) {
+            showMessage('妹子说:' + data.intent, 5000);
+            return;
+        }
+        /*
         {
-            url: "http://openapi.tuling123.com/openapi/api/v2",
-            data: reqJson,
-            dataType: 'jsonp',
-            success: function (data) {
-                console.log(data);
-                var code = data.intent.code;
-                if (code === 5000) {
-                    showMessage('妹子无fuck说', 5000);
-                    return;
-                }
-                /*
-                {
-                    "intent": {
-                        "code": 10005,
-                        "intentName": "",
-                        "actionName": "",
-                        "parameters": {
-                            "nearby_place": "酒店"
-                        }
-                    },
-                    "results": [
-                        {
-                            "groupType": 1,
-                            "resultType": "url",
-                            "values": {
-                                "url": "http://m.elong.com/hotel/0101/nlist/#indate=2016-12-10&outdate=2016-12-11&keywords=%E4%BF%A1%E6%81%AF%E8%B7%AF"
-                            }
-                        },
-                        {
-                            "groupType": 1,
-                            "resultType": "text",
-                            "values": {
-                                "text": "亲，已帮你找到相关酒店信息"
-                            }
-                        }
-                    ]
-                }
-                */
-                if (data !== '') {
-                    for (var resultObj in results.results) {
-                        if (resultObj.resultType === 'text') {
-                            showMessage(resultObj.values.text, 5000);
-                        }
-                    }
-                    // for (var i = 0; i < results.results.length; i++) {
-                    // }
-                    showMessage(data, 5000);
-                } else {
-                    showMessage('妹子笑而不语', 5000);
+            "intent": {
+                "code": 10005,
+                "intentName": "",
+                "actionName": "",
+                "parameters": {
+                    "nearby_place": "酒店"
                 }
             },
-            error: function () {
-                showMessage('妹子短路啦！', 5000);
-            }
+            "results": [
+                {
+                    "groupType": 1,
+                    "resultType": "url",
+                    "values": {
+                        "url": "http://m.elong.com/hotel/0101/nlist/#indate=2016-12-10&outdate=2016-12-11&keywords=%E4%BF%A1%E6%81%AF%E8%B7%AF"
+                    }
+                },
+                {
+                    "groupType": 1,
+                    "resultType": "text",
+                    "values": {
+                        "text": "亲，已帮你找到相关酒店信息"
+                    }
+                }
+            ]
         }
-    );
+        */
+        if (response !== '') {
+            for (var resultObj in results.results) {
+                if (resultObj.resultType === 'text') {
+                    showMessage(resultObj.values.text, 5000);
+                }
+            }
+            // for (var i = 0; i < results.results.length; i++) {
+            // }
+            showMessage(data, 5000);
+        } else {
+            showMessage('妹子笑而不语', 5000);
+        }
+    });
 }
 
 function chatUILogic() {
