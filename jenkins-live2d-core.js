@@ -31,7 +31,7 @@ function sendChatToBot(chatContent) {
             "cache-control": "no-cache",
             "postman-token": "fea35f00-3f49-11c5-1919-0a0c53871d42"
         },
-        "data": json.stringify(reqJson)
+        "data": JSON.stringify(reqJson)
     };
 
     Q.ajax(settings).done(function (response) {
