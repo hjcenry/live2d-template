@@ -22,11 +22,10 @@ function sendChatToBot(chatContent) {
         }
     };
 
-    Q.ajax(
+    Q.post(
         {
             url: "http://openapi.tuling123.com/openapi/api/v2",
             data: reqJson,
-            type: 'POST',
             dataType: 'jsonp',
             success: function (data) {
                 console.log(data);
