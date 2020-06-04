@@ -27,7 +27,7 @@ function sendChatToBot(chatContent) {
             url: "http://openapi.tuling123.com/openapi/api/v2",
             data: reqJson,
             type: 'POST',
-            dataType: 'json',
+            dataType: 'jsonp',
             success: function (data) {
                 console.log(data);
                 var code = data.intent.code;
