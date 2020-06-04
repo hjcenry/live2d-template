@@ -1,6 +1,88 @@
 var message_Path = 'http://172.16.1.98:8083/userContent/live2d-core';
 var home_Path = 'http://172.16.1.98:8083/';
 
+function sendChatToBot(chatContent) {
+    var reqJson = {
+        "reqType": 0,
+        "perception": {
+            "inputText": {
+                "text": chatContent
+            },
+            "selfInfo": {
+                "location": {
+                    "city": "北京",
+                    "province": "北京",
+                    "street": "信息路"
+                }
+            }
+        },
+        "userInfo": {
+            "apiKey": "1e2a0c44b3994b4ab0679704f2588591",
+            "userId": "dmc"
+        }
+    };
+
+    Q.ajax(
+        {
+            url: "http://openapi.tuling123.com/openapi/api/v2",
+            data: reqJson,
+            type: POST,
+            dataType: json,
+            success: function (data) {
+                console.log(data);
+                var code = data.intent.code;
+                if (code === 5000) {
+                    showMessage('妹子无fuck说', 5000);
+                    return;
+                }
+                /*
+                {
+                    "intent": {
+                        "code": 10005,
+                        "intentName": "",
+                        "actionName": "",
+                        "parameters": {
+                            "nearby_place": "酒店"
+                        }
+                    },
+                    "results": [
+                        {
+                            "groupType": 1,
+                            "resultType": "url",
+                            "values": {
+                                "url": "http://m.elong.com/hotel/0101/nlist/#indate=2016-12-10&outdate=2016-12-11&keywords=%E4%BF%A1%E6%81%AF%E8%B7%AF"
+                            }
+                        },
+                        {
+                            "groupType": 1,
+                            "resultType": "text",
+                            "values": {
+                                "text": "亲，已帮你找到相关酒店信息"
+                            }
+                        }
+                    ]
+                }
+                */
+                if (data !== '') {
+                    for (var resultObj in results.results) {
+                        if (resultObj.resultType === 'text') {
+                            showMessage(resultObj.values.text, 5000);
+                        }
+                    }
+                    // for (var i = 0; i < results.results.length; i++) {
+                    // }
+                    showMessage(data, 5000);
+                } else {
+                    showMessage('妹子笑而不语', 5000);
+                }
+            },
+            error: function () {
+                showMessage('妹子短路啦！', 5000);
+            }
+        }
+    );
+}
+
 function chatUILogic() {
     var showChatBtn = Q("<button class='chat-button'>聊天</button>");
     Q('div#landlord').append(showChatBtn);
@@ -31,7 +113,12 @@ function chatUILogic() {
     Q(sendChatBtn).click(function () {
         var chatContent = Q(chatInput).val();
         console.log(chatContent);
-        showMessage(chatContent, 5000);
+        var reply = sendChatToBot(chatContent);
+        if (reply !== '') {
+            showMessage(reply, 5000);
+        } else {
+            showMessage(chatContent, 5000);
+        }
     })
 }
 
