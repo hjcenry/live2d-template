@@ -10,7 +10,7 @@ function sendChatToQingyunkeBot(chatContent) {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://127.0.0.1:5000/robot2?key=free&appid=0&msg=" + chatContent,
+        "url": "http://172.16.1.98:5000/robot2?key=free&appid=0&msg=" + chatContent,
         "method": "GET",
         "headers": {
             "cache-control": "no-cache",
