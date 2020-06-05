@@ -122,7 +122,15 @@ function chatUILogic() {
         } else {
             showMessage(chatContent, 5000);
         }
-    })
+    });
+
+    //回车事件绑定
+    Q(chatInput).bind('keyup', function(event) {
+        if (event.keyCode == "13") {
+            //回车执行查询
+            Q(sendChatBtn).click();
+        }
+    });
 }
 
 //loadlive2d("live2d", "http://172.16.1.98:8083/userContent/live2d-core/model/tia/model.json");
