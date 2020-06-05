@@ -110,6 +110,14 @@ function sendChatToQingyunkeBot(chatContent) {
 
     Q.ajax(settings).done(function (response) {
         console.log(response);
+        var jsonData = JSON.parse(response);
+        var code = jsonData.result;
+        var content = jsonData.content;
+        if (code !== 0) {
+            showMessage("我不知道说什么，并报了一个错:" + code + "-" + content, 5000);
+        } else {
+            showMessage(content, 5000);
+        }
     });
 }
 
