@@ -36,11 +36,11 @@ function sendChatToBot(chatContent) {
     Q.ajax(settings).done(function (response) {
         console.log(response);
         var jsonData = JSON.parse(response);
-        // var code = jsonData.intent.code;
-        // if (code === 5000) {
-        //     showMessage('妹子说:' + data.intent, 5000);
-        //     return;
-        // }
+        var code = jsonData.intent.code;
+        if (code === 4003) {
+            showMessage('我今天的话说完了，明天再来吧', 5000);
+            return;
+        }
         /*
         {
             "intent": {
@@ -116,12 +116,7 @@ function chatUILogic() {
     Q(sendChatBtn).click(function () {
         var chatContent = Q(chatInput).val();
         console.log(chatContent);
-        var reply = sendChatToBot(chatContent);
-        if (reply !== '') {
-            showMessage(reply, 5000);
-        } else {
-            showMessage(chatContent, 5000);
-        }
+        sendChatToBot(chatContent);
         Q(chatInput).val('');
     });
 
