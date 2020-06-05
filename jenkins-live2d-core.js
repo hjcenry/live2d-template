@@ -70,14 +70,12 @@ function sendChatToBot(chatContent) {
         }
         */
         if (jsonData !== '') {
-            for (var resultObj in jsonData.results) {
-                if (resultObj.resultType === 'text') {
+            for (var i = 0, l = jsonData.results.length; i < l; i++) {
+                for (var key in jsonData.results[i]) {
+                    var resultObj = jsonData.results[i][key];
                     showMessage(resultObj.values.text, 5000);
                 }
             }
-            // for (var i = 0; i < results.results.length; i++) {
-            // }
-            // showMessage(data, 5000);
         } else {
             showMessage('妹子笑而不语', 5000);
         }
