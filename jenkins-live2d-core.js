@@ -2,6 +2,35 @@ var message_Path = 'http://172.16.1.98:8083/userContent/live2d-core';
 var home_Path = 'http://172.16.1.98:8083/';
 
 /**
+ * 青云客机器人
+ * http://api.qingyunke.com/
+ * @param chatContent
+ */
+function sendChatToQingyunkeBot(chatContent) {
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://127.0.0.1:5000/robot2?key=free&appid=0&msg=" + chatContent,
+        "method": "GET",
+        "headers": {
+            "cache-control": "no-cache",
+        }
+    };
+
+    Q.ajax(settings).done(function (response) {
+        console.log(response);
+        var jsonData = JSON.parse(response);
+        var code = jsonData.result;
+        var content = jsonData.content;
+        if (code !== 0) {
+            showMessage("我不知道说什么，并报了一个错:" + code + "-" + content, 5000);
+        } else {
+            showMessage(content, 5000);
+        }
+    });
+}
+
+/**
  * 图灵机器人
  * http://www.tuling123.com/
  * @param chatContent
@@ -44,7 +73,9 @@ function sendChatToTulingBot(chatContent) {
         var code = jsonData.intent.code;
         console.log("code:" + code);
         if (code === 4003) {
-            showMessage('今天的陪聊服务结束啦，明天再来吧', 5000);
+            // showMessage('今天的陪聊服务结束啦，明天再来吧', 5000);
+            console.log('图灵机器人陪聊结束，转接青云客机器人');
+            sendChatToQingyunkeBot(chatContent);
             return;
         }
         /*
@@ -92,35 +123,6 @@ function sendChatToTulingBot(chatContent) {
     });
 }
 
-/**
- * 青云客机器人
- * http://api.qingyunke.com/
- * @param chatContent
- */
-function sendChatToQingyunkeBot(chatContent) {
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "http://api.qingyunke.com/api.php?key=free&appid=0&msg=" + chatContent,
-        "method": "GET",
-        "headers": {
-            "cache-control": "no-cache",
-        }
-    };
-
-    Q.ajax(settings).done(function (response) {
-        console.log(response);
-        var jsonData = JSON.parse(response);
-        var code = jsonData.result;
-        var content = jsonData.content;
-        if (code !== 0) {
-            showMessage("我不知道说什么，并报了一个错:" + code + "-" + content, 5000);
-        } else {
-            showMessage(content, 5000);
-        }
-    });
-}
-
 function chatUILogic() {
     var showChatBtn = Q("<button class='chat-button'>聊天</button>");
     Q('div#landlord').append(showChatBtn);
@@ -151,8 +153,8 @@ function chatUILogic() {
     Q(sendChatBtn).click(function () {
         var chatContent = Q(chatInput).val();
         console.log(chatContent);
-        // sendChatToTulingBot(chatContent);
-        sendChatToQingyunkeBot(chatContent);
+        sendChatToTulingBot(chatContent);
+        // sendChatToQingyunkeBot(chatContent);
         Q(chatInput).val('');
     });
 
