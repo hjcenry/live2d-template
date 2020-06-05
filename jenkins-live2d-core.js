@@ -1,7 +1,12 @@
 var message_Path = 'http://172.16.1.98:8083/userContent/live2d-core';
 var home_Path = 'http://172.16.1.98:8083/';
 
-function sendChatToBot(chatContent) {
+/**
+ * 图灵机器人
+ * http://www.tuling123.com/
+ * @param chatContent
+ */
+function sendChatToTulingBot(chatContent) {
     var reqJson = {
         "reqType": 0,
         "perception": {
@@ -87,6 +92,27 @@ function sendChatToBot(chatContent) {
     });
 }
 
+/**
+ * 青云客机器人
+ * http://api.qingyunke.com/
+ * @param chatContent
+ */
+function sendChatToQingyunkeBot(chatContent) {
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://api.qingyunke.com/api.php?key=free&appid=0&msg=" + chatContent,
+        "method": "GET",
+        "headers": {
+            "cache-control": "no-cache",
+        }
+    };
+
+    Q.ajax(settings).done(function (response) {
+        console.log(response);
+    });
+}
+
 function chatUILogic() {
     var showChatBtn = Q("<button class='chat-button'>聊天</button>");
     Q('div#landlord').append(showChatBtn);
@@ -117,7 +143,8 @@ function chatUILogic() {
     Q(sendChatBtn).click(function () {
         var chatContent = Q(chatInput).val();
         console.log(chatContent);
-        sendChatToBot(chatContent);
+        // sendChatToTulingBot(chatContent);
+        sendChatToQingyunkeBot(chatContent);
         Q(chatInput).val('');
     });
 
