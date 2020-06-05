@@ -25,7 +25,7 @@ function sendChatToBot(chatContent) {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://127.0.0.1:5000/robot",
+        "url": "http://172.16.1.98:5000/robot",
         "method": "POST",
         "headers": {
             "cache-control": "no-cache",
