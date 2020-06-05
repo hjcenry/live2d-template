@@ -122,6 +122,7 @@ function chatUILogic() {
         } else {
             showMessage(chatContent, 5000);
         }
+        Q(chatInput).val('');
     });
 
     //回车事件绑定
