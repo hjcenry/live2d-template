@@ -35,11 +35,12 @@ function sendChatToBot(chatContent) {
 
     Q.ajax(settings).done(function (response) {
         console.log(response);
-        var code = response.intent.code;
-        if (code === 5000) {
-            showMessage('妹子说:' + data.intent, 5000);
-            return;
-        }
+        var jsonData = JSON.parse(response);
+        // var code = jsonData.intent.code;
+        // if (code === 5000) {
+        //     showMessage('妹子说:' + data.intent, 5000);
+        //     return;
+        // }
         /*
         {
             "intent": {
@@ -68,15 +69,15 @@ function sendChatToBot(chatContent) {
             ]
         }
         */
-        if (response !== '') {
-            for (var resultObj in results.results) {
+        if (jsonData !== '') {
+            for (var resultObj in jsonData.results) {
                 if (resultObj.resultType === 'text') {
                     showMessage(resultObj.values.text, 5000);
                 }
             }
             // for (var i = 0; i < results.results.length; i++) {
             // }
-            showMessage(data, 5000);
+            // showMessage(data, 5000);
         } else {
             showMessage('妹子笑而不语', 5000);
         }
