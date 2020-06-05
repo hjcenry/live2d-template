@@ -37,6 +37,7 @@ function sendChatToBot(chatContent) {
         console.log(response);
         var jsonData = JSON.parse(response);
         var code = jsonData.intent.code;
+        console.log("code:" + code);
         if (code === 4003) {
             showMessage('我今天的话说完了，明天再来吧', 5000);
             return;
