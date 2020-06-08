@@ -2,11 +2,69 @@ var message_Path = 'http://172.16.1.98:8083/userContent/live2d-core';
 var home_Path = 'http://172.16.1.98:8083/';
 
 /**
+ * 腾讯AI机器人
+ * https://ai.qq.com/console/home
+ * @param chatContent
+ * @param username
+ */
+function sendChatToTencentBot(chatContent, username) {
+}
+
+/**
+ * 海知智能机器人
+ * https://ruyi.ai/console/api_manager.html
+ * @param chatContent
+ * @param username
+ */
+function sendChatToHaizhiBot(chatContent, username) {
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://172.16.1.98:5000/robot3?q=" + chatContent + "&app_key=354cd13e-3290-46af-8e3c-a67212547b64&user_id=" + username,
+        "method": "GET",
+        "headers": {
+            "cache-control": "no-cache",
+        }
+    };
+
+    Q.ajax(settings).done(function (response) {
+        console.log(response);
+        var jsonData = JSON.parse(response);
+        var code = jsonData.code;
+        var intent = jsonData.result.intents[0];
+        if (code !== 0) {
+            showMessage('[' + code + ']' + jsonData.msg, 5000);
+            return;
+        }
+        // 文字回答
+        var outputs = intent.outputs;
+        for (var i = 0, l = outputs.length; i < l; i++) {
+            if (outputs[i].resultType === 'dialog') {
+                var text = outputs[i].property.text;
+                showMessage(text, 5000);
+            }
+        }
+        // 语音链接
+        if (intent.result.response != undefined) {
+            var dataResult = intent.result.response.result;
+            var trackLen = dataResult.track_list.length;
+            var rdmIndex = Math.round(Math.random() * (trackLen - 1));
+            var audioSrc = dataResult.track_list[rdmIndex].mergedFrom[0].audio[0];
+            console.log('audio src:' + audioSrc);
+            var snd = document.getElementById(LAppDefine.AUDIO_ID);
+            snd.src = audioSrc;
+            musicPlay(true);
+        }
+    });
+}
+
+/**
  * 青云客机器人
  * http://api.qingyunke.com/
  * @param chatContent
+ * @param username
  */
-function sendChatToQingyunkeBot(chatContent) {
+function sendChatToQingyunkeBot(chatContent, username) {
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -34,8 +92,9 @@ function sendChatToQingyunkeBot(chatContent) {
  * 图灵机器人
  * http://www.tuling123.com/
  * @param chatContent
+ * @param username
  */
-function sendChatToTulingBot(chatContent) {
+function sendChatToTulingBot(chatContent, username) {
     var reqJson = {
         "reqType": 0,
         "perception": {
@@ -52,7 +111,7 @@ function sendChatToTulingBot(chatContent) {
         },
         "userInfo": {
             "apiKey": "1ddda776a4b9477683692035d3729845",
-            "userId": "dmc"
+            "userId": username
         }
     };
 
@@ -75,7 +134,7 @@ function sendChatToTulingBot(chatContent) {
         if (code === 4003) {
             // showMessage('今天的陪聊服务结束啦，明天再来吧', 5000);
             console.log('图灵机器人陪聊结束，转接青云客机器人');
-            sendChatToQingyunkeBot(chatContent);
+            sendChatToQingyunkeBot(chatContent, username);
             return;
         }
         /*
@@ -112,10 +171,6 @@ function sendChatToTulingBot(chatContent) {
                     var text = jsonData.results[i].values.text;
                     showMessage(text, 5000);
                 }
-                // for (var key in jsonData.results[i]) {
-                //     var resultObj = jsonData.results[i][key];
-                //     showMessage(resultObj.values.text, 5000);
-                // }
             }
         } else {
             showMessage('妹子笑而不语', 5000);
@@ -150,16 +205,23 @@ function chatUILogic() {
         Q(hideChatBtn).hide();
     });
 
+    var username_url = Q('#header').find('.login').find('a').attr('href');
+    console.log(username_url);
+    var username_arr = username_url.split('/');
+    username = username_arr[username_arr.length - 1];
+    console.log('username:' + username);
+
     Q(sendChatBtn).click(function () {
         var chatContent = Q(chatInput).val();
         console.log(chatContent);
-        sendChatToTulingBot(chatContent);
+        // sendChatToTulingBot(chatContent, username);
         // sendChatToQingyunkeBot(chatContent);
+        sendChatToHaizhiBot(chatContent, username);
         Q(chatInput).val('');
     });
 
     //回车事件绑定
-    Q(chatInput).bind('keyup', function(event) {
+    Q(chatInput).bind('keyup', function (event) {
         if (event.keyCode == "13") {
             //回车执行查询
             Q(sendChatBtn).click();
