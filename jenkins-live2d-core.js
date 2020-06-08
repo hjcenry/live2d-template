@@ -137,34 +137,6 @@ function sendChatToTulingBot(chatContent, username) {
             sendChatToQingyunkeBot(chatContent, username);
             return;
         }
-        /*
-        {
-            "intent": {
-                "code": 10005,
-                "intentName": "",
-                "actionName": "",
-                "parameters": {
-                    "nearby_place": "酒店"
-                }
-            },
-            "results": [
-                {
-                    "groupType": 1,
-                    "resultType": "url",
-                    "values": {
-                        "url": "http://m.elong.com/hotel/0101/nlist/#indate=2016-12-10&outdate=2016-12-11&keywords=%E4%BF%A1%E6%81%AF%E8%B7%AF"
-                    }
-                },
-                {
-                    "groupType": 1,
-                    "resultType": "text",
-                    "values": {
-                        "text": "亲，已帮你找到相关酒店信息"
-                    }
-                }
-            ]
-        }
-        */
         if (jsonData !== '') {
             for (var i = 0, l = jsonData.results.length; i < l; i++) {
                 if (jsonData.results[i].resultType === 'text') {
@@ -205,7 +177,7 @@ function chatUILogic() {
         Q(hideChatBtn).hide();
     });
 
-    var username_url = Q('#header').find('.login').find('a').attr('href');
+    var username_url = Q('#header').find('.page-header__hyperlinks').find('a.inverse').attr('href');
     console.log(username_url);
     var username_arr = username_url.split('/');
     username = username_arr[username_arr.length - 1];
