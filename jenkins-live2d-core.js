@@ -37,7 +37,7 @@ function sendChatToHaizhiBot(chatContent, username) {
         var outputs = intent.outputs;
         for (var i = 0, l = outputs.length; i < l; i++) {
             console.log(outputs[i]);
-            if (outputs[i].resultType === 'dialog') {
+            if (outputs[i].type === 'dialog') {
                 var text = outputs[i].property.text;
                 showMessage(text, 5000);
             }
