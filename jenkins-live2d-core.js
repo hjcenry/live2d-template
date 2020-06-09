@@ -42,17 +42,20 @@ function sendChatToHaizhiBot(chatContent, username) {
                 showMessage(text, 5000);
             }
         }
-        // 语音链接
-        if (intent.result.response != undefined) {
-            var dataResult = intent.result.response.result;
-            var trackLen = dataResult.track_list.length;
-            var rdmIndex = Math.round(Math.random() * (trackLen - 1));
-            var audioSrc = dataResult.track_list[rdmIndex].mergedFrom[0].audio[0];
-            console.log('audio src:' + audioSrc);
-            var snd = document.getElementById(LAppDefine.AUDIO_ID);
-            snd.src = audioSrc;
-            musicPlay(true);
-        }
+        // 语音链接 太复杂了,不同平台的音乐解析方式还不一样,不弄了,浪费时间
+        // if (intent.result.response != undefined) {
+        //     var dataResult = intent.result.response.result;
+        //     if (dataResult != undefined) {
+        //
+        //     }
+        //     var trackLen = dataResult.track_list.length;
+        //     var rdmIndex = Math.round(Math.random() * (trackLen - 1));
+        //     var audioSrc = dataResult.track_list[rdmIndex].mergedFrom[0].audio[0];
+        //     console.log('audio src:' + audioSrc);
+        //     var snd = document.getElementById(LAppDefine.AUDIO_ID);
+        //     snd.src = audioSrc;
+        //     musicPlay(true);
+        // }
     });
 }
 
@@ -131,8 +134,10 @@ function sendChatToTulingBot(chatContent, username) {
         console.log("code:" + code);
         if (code === 4003) {
             // showMessage('今天的陪聊服务结束啦，明天再来吧', 5000);
-            console.log('图灵机器人陪聊结束，转接青云客机器人');
-            sendChatToQingyunkeBot(chatContent, username);
+            // console.log('图灵机器人陪聊结束，转接青云客机器人');
+            // sendChatToQingyunkeBot(chatContent, username);
+            console.log('图灵机器人陪聊结束，转接海知智能机器人');
+            sendChatToHaizhiBot(chatContent, username);
             return;
         }
         if (jsonData !== '') {
@@ -184,9 +189,9 @@ function chatUILogic() {
     Q(sendChatBtn).click(function () {
         var chatContent = Q(chatInput).val();
         console.log(chatContent);
-        // sendChatToTulingBot(chatContent, username);
+        sendChatToTulingBot(chatContent, username);
         // sendChatToQingyunkeBot(chatContent);
-        sendChatToHaizhiBot(chatContent, username);
+        // sendChatToHaizhiBot(chatContent, username);
         Q(chatInput).val('');
     });
 
