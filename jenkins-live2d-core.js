@@ -20,11 +20,8 @@ function sendChatToHaizhiBot(chatContent, username) {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://172.16.1.98:5000/robot3?q=" + chatContent + "&app_key=354cd13e-3290-46af-8e3c-a67212547b64&user_id=" + username,
+        "url": "http://api.ruyi.ai/v1/message?q=" + chatContent + "&app_key=354cd13e-3290-46af-8e3c-a67212547b64&user_id=" + username,
         "method": "GET",
-        "headers": {
-            "cache-control": "no-cache",
-        }
     };
 
     Q.ajax(settings).done(function (response) {
