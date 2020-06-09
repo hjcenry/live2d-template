@@ -29,7 +29,7 @@ function sendChatToHaizhiBot(chatContent, username) {
 
     Q.ajax(settings).done(function (response) {
         console.log(response);
-        var jsonData = JSON.parse(response);
+        var jsonData = response;
         var code = jsonData.code;
         var intent = jsonData.result.intents[0];
         if (code !== 0) {
@@ -39,6 +39,7 @@ function sendChatToHaizhiBot(chatContent, username) {
         // 文字回答
         var outputs = intent.outputs;
         for (var i = 0, l = outputs.length; i < l; i++) {
+            console.log(outputs[i]);
             if (outputs[i].resultType === 'dialog') {
                 var text = outputs[i].property.text;
                 showMessage(text, 5000);
